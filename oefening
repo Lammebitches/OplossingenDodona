@@ -1,0 +1,110 @@
+
+import java.util.Scanner;
+
+
+public class APGAR {
+
+    public static void main(String[] args) {
+    
+    //Declaratie van de variabelen
+    String ademhaling, spierspanning, kleur, prikkels, kutje;
+    int polsslag, score = 0;
+    boolean foutieveInput = false;
+    
+    //Dialoogje :o
+    
+    System.out.println("Omschrijf de ademhaling:");
+    Scanner keyb = new Scanner(System.in);
+    ademhaling = keyb.nextLine();
+    
+    System.out.println("Omschrijf de polsslag:");
+    polsslag = keyb.nextInt();
+    kutje = keyb.nextLine();
+    
+    System.out.println("Omschrijf de spierspanning:");
+    spierspanning = keyb.nextLine();
+    
+    System.out.println("Omschrijf het aspect/de kleur:");
+    kleur = keyb.nextLine();
+    
+    System.out.println("Omschrijf de reactie op prikkels:");
+    prikkels = keyb.nextLine();
+    
+    //Score berekenen
+    //1. ademhaling
+    if(ademhaling.equals("geen"));
+    else if(ademhaling.equals("zwak")){
+        score++;
+    }
+    else if(ademhaling.equals("goed doorhuilen")){
+        score += 2;
+    } 
+    else{
+     System.out.println("De omschrijving van de ademhaling is ongeldig.");
+     foutieveInput = true;
+    }
+    //2. polsslag
+    if(polsslag == 0);
+    else if(polsslag <100){
+        score++;
+    }
+    else if(polsslag >= 100){
+        score += 2;
+    }
+    else{
+     System.out.println("De omschrijving van de polsslag is ongeldig.");
+     foutieveInput = true;
+    }
+    //3. Spierspanning
+    if(spierspanning.equals("slap"));
+    else if(spierspanning.equals("enige flexie")){
+        score++;
+    }
+    else if(spierspanning.equals("actieve beweging")){
+        score += 2;
+    }
+    else{
+     System.out.println("De omschrijving van de spierspanning is ongeldig.");
+     foutieveInput = true;
+    }
+    // 4. Aspect/kleur
+    if(kleur.equals("blauw") || kleur.equals("bleek"));
+    else if(kleur.equals("extremiteiten")){
+        score++;
+    }
+    else if(kleur.equals("roze")){
+        score += 2;
+    }
+    else{
+     System.out.println("De omschrijving van het aspect is ongeldig.");
+     foutieveInput = true;
+    }
+    //5. prikkels
+    if(prikkels.equals("geen"));
+    else if(prikkels.equals("enige beweging")){
+        score++;
+    }
+    else if(prikkels.equals("krachtig huilen")){
+        score += 2;    
+    }
+    else{
+     System.out.println("De omschrijving van de reactie is ongeldig.");
+     foutieveInput=true;
+    }
+
+   if(foutieveInput){
+    System.out.println("Er is ongelidige input gegeven en de APGAR score kan niet berekend worden.");
+}
+   else if(score < 4){
+       System.out.println("Er is een te lage APGAR score gedetecteerd, onmiddelijke ondersteunende hulp is vereist!");
+   }
+   else if(score >= 4 && score <= 10){
+       System.out.println("De APGAR score bedraagt "+ score +".");
+   }
+   else{
+       System.out.println("Da was gek veel typen en nog fout uitkomen? damnnn boiiiii");
+   }
+   
+   
+   
+    }}

@@ -1,0 +1,80 @@
+
+package oefenen;
+
+
+public class Hangman {
+
+private String geheimWoord, verborgenWoord;
+private int aantalPogingen, aantalNietCorPogingen;
+
+    public Hangman(String geheimWoord) {
+        this.geheimWoord = geheimWoord;
+        int lengte = this.geheimWoord.length();
+        String temp = "?";
+        for(int i = 1; i < lengte; i++ ){
+            temp = temp +"?";
+        }
+        this.verborgenWoord = temp;
+        aantalPogingen = 0;
+        aantalNietCorPogingen = 0;
+        
+    }
+
+    public String getVerborgenWoord() {
+        return verborgenWoord;
+    }
+
+    public int getAantalPogingen() {
+        return aantalPogingen;
+    }
+
+    public int getAantalNietCorPogingen() {
+        return aantalNietCorPogingen;
+    }
+
+    public boolean raadLetter(char letter){
+        int count = 0;
+        char[] array = new char[geheimWoord.length()];
+        for(int i =0; i<geheimWoord.length(); i++){
+            if(geheimWoord.charAt(i) == Character.toLowerCase(letter)){
+            array = verborgenWoord.toCharArray();
+            array[i] = Character.toLowerCase(letter);
+            verborgenWoord = String.valueOf(array);            
+            count++;
+            }
+            else if(geheimWoord.charAt(i) == Character.toUpperCase(letter) ){
+            array = verborgenWoord.toCharArray();
+            array[i] = Character.toUpperCase(letter);
+            verborgenWoord = String.valueOf(array);            
+            count++;
+            }
+        }
+        if(count ==0)
+            aantalNietCorPogingen++;
+        aantalPogingen++;
+        return (count !=0);
+    }
+
+    public boolean isGeraden(){
+        return verborgenWoord.equals(geheimWoord);
+    }
+    
+public static void main(String[] args){
+    Hangman halg = new Hangman("eBOla");
+    System.out.println(halg.geheimWoord + " " + halg.verborgenWoord);
+    System.out.println(halg.geheimWoord.length() + " " +
+            halg.verborgenWoord.length());
+    System.out.println(halg.verborgenWoord);
+    halg.raadLetter('l');
+    System.out.println(halg.verborgenWoord);
+    halg.raadLetter('b');
+    halg.raadLetter('h');
+    halg.raadLetter('o');
+    halg.raadLetter('a');
+    System.out.println(halg.verborgenWoord);
+    System.out.println(halg.isGeraden());
+    System.out.println(halg.aantalPogingen + " " + halg.aantalNietCorPogingen);;
+}
+
+    
+}

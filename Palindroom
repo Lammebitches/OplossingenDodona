@@ -1,0 +1,140 @@
+import java.util.Scanner;
+
+public class Palindroom {
+
+public static boolean isPalindroom(String woord){
+   int lengteWoord = woord.length(), count = 0;
+   boolean test;
+   woord = woord.toLowerCase();
+   woord = woord.replaceAll(" ", "");
+   woord = woord.replaceAll("!", "");
+   woord = woord.replaceAll("\\.", "");
+   woord = woord.replaceAll("\\?", "");
+   woord = woord.replaceAll(",", "");
+   woord = woord.replaceAll("-", "");
+   
+   
+   for(int i = 0; i < woord.length(); i++){
+   if(woord.charAt(i) != woord.charAt(woord.length() -1 - i)){
+       count++;
+   }
+   }
+   test = count == 0;
+   return test;
+}
+public static boolean isPalindroom(char[] woord){
+   int lengteWoord = woord.length, count = 0;
+   boolean test;
+   for(int i = 0; i < lengteWoord; i++){
+       Character.toLowerCase(woord[i]);
+   if(woord[i] != woord[lengteWoord-1 - i]){
+       count++;
+   }
+   }
+   test = count == 0;
+   return test;
+}
+public static boolean isPalindroom(int getal){
+int r, sum=0, temp;
+int n= getal;
+temp = n;
+while(n>0){
+    r=n%10;
+    sum=(sum*10)+r;
+    n=n/10;
+            
+}
+return temp==sum;
+}
+
+public static void main(String[] args){
+    Scanner keyb = new Scanner(System.in);
+//vragen ivm char[]
+    System.out.println("Geef een char array in:");
+    String array = keyb.nextLine();
+   array = array.toLowerCase();
+    array = array.replaceAll(" ", "");
+     int lengte = array.length();
+    char[] arrayke = new char[lengte];
+    for(int i=0; i<lengte; i ++){
+        arrayke[i] = array.charAt(i);
+    }
+    boolean test1 = isPalindroom(arrayke);
+    if(test1){
+        System.out.println("Array van char met palindroom woord");
+    }
+    else{
+        System.out.println("Array van char met niet-palindroom woord");
+    }
+    System.out.println("Geef een char array in:");
+    String array2 = keyb.nextLine();
+    array2 = array2.toLowerCase();
+    array2 = array2.replaceAll(" ", "");
+    int lengte2 = array2.length();
+    char[] arrayke2 = new char[lengte2];
+    for(int i=0; i<lengte2; i += 2){
+        arrayke2[i] = array2.charAt(i);
+    }
+    boolean test2 = isPalindroom(arrayke2);
+    if(test2){
+        System.out.println("Array van char met palindroom woord");
+    }
+    else{
+        System.out.println("Array van char met niet-palindroom woord");
+    }
+//String met palindroom & stringske zonder    
+System.out.println("Geef een woord in:");
+String woord1 = keyb.nextLine();
+boolean test3 = isPalindroom(woord1);
+if(test3)
+    System.out.println("String met palindroom woord");
+else
+    System.out.println("String met niet-palindroom woord");
+System.out.println("Geef een woord in:");
+String woord2 = keyb.nextLine();
+boolean test4 = isPalindroom(woord2);
+if(test4)
+    System.out.println("String met palindroom woord");
+else
+    System.out.println("String met niet-palindroom woord");
+//String met palindroom zin
+System.out.println("Geef een zin in:");
+String zin1 = keyb.nextLine();
+boolean test5 = isPalindroom(zin1);
+if(test5)
+    System.out.println("String met palindroom zin");
+else
+    System.out.println("String met niet-palindroom zin");
+System.out.println("Geef een zin in:");
+String zin2 = keyb.nextLine();
+boolean test6 = isPalindroom(zin2);
+if(test6)
+    System.out.println("String met palindroom zin");
+else
+    System.out.println("String met niet-palindroom zin");
+
+
+//getal
+System.out.println("Geef een getal in:");
+String getal1 = keyb.nextLine();
+int getala = Integer.parseInt(getal1);
+
+boolean test7 = isPalindroom(getala);
+
+if(test7)
+    System.out.println("Int met palindroom getal");
+else
+    System.out.println("Int met niet-palindroom getal");
+
+
+System.out.println("Geef een getal in:");
+String getal2 = keyb.nextLine();
+int getalb = Integer.parseInt(getal2);
+boolean test8 = isPalindroom(getalb);
+if(test8)
+    System.out.println("Int met palindroom getal");
+else
+    System.out.println("Int met niet-palindroom getal");
+}
+
+}

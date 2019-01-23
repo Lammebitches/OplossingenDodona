@@ -1,0 +1,70 @@
+
+import java.util.Scanner;
+
+
+public class GeheimeCode {
+
+    public static void main(String[] args) {
+
+    Scanner keyboard= new Scanner(System.in);
+    String code = "", oplossing ="";
+    char[] oLetters, nLetters;
+
+        
+        
+    System.out.println("Geef de geheime code:");
+    code = keyboard.nextLine();
+    
+    oLetters= code.toCharArray();
+    
+    int[] nAscii = new int[oLetters.length]; 
+    int[] oAscii = new int[oLetters.length];    
+    //omzetten naar array met ascii codes
+    for(int i = 0; i < oLetters.length; i++){
+    oAscii[i] = oLetters[i];
+    }
+     
+    for(int sleutel = 1; sleutel <= 100; sleutel++){
+    oplossing = "";
+    for(int i =0; i< oLetters.length; i++){
+    
+        if(oAscii[i] < 32 + sleutel){
+            nAscii[i] = (oAscii[i] - 32) + 127 - sleutel;
+        }
+        else
+        nAscii[i] = oAscii[i] - sleutel;
+    } 
+    nLetters = new char[oLetters.length];
+    for(int i = 0; i < oLetters.length; i++){
+    nLetters[i] = (char) nAscii[i];
+    }
+    for(int i = 0; i < nLetters.length; i++){
+    oplossing = oplossing + nLetters[i];
+    }
+    int count = 0;
+    for(int i = 0; i < nLetters.length; i++){
+        if(nAscii[i] > 126 || nAscii[i] < 32){
+        count++;
+        }
+    }
+    
+    if(count!= 0){
+                    System.out.println("Met sleutel " + sleutel +" krijgen we geen ontcijferbare boodschap!" );
+
+    }
+    else 
+        System.out.println("Met sleutel " + sleutel + " krijgen we de boodschap: " + oplossing);
+    }
+    
+
+    
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+}

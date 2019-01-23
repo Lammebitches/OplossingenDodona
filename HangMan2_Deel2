@@ -1,0 +1,46 @@
+
+package oefenen;
+
+import java.util.Scanner;
+
+public class Hangman2Demo {
+    public static void main(String[] args) {
+        boolean solved = false, validWoord = false, validKarakter = false;
+        String woord ="", letters ="";
+        char letter;
+        Scanner keyb = new Scanner(System.in);
+        String[] woorden = {"Yucca","Gravensteen","Durf Denken","Universiteit Gent"}; 
+        Hangman2 demo = new Hangman2(woorden);
+        String hahaha;
+        
+        
+        while(solved == false){
+                    while(validKarakter == false){
+        int aantal = demo.getAantalPogingen();
+        System.out.println("Het verborgen woord is voorlopig: "+ String.valueOf(demo.getGeRadenTekst())
+         + "\n" + "Aantal gedane gokken: "+ demo.getAantalPogingen() + "\n" + "Geef een"
+         + " karakter in:");
+
+        letters = keyb.nextLine();
+        if(letters.length() !=1)
+            System.out.println("Geef een enkel karakter in!");
+        else
+          validKarakter = true;  
+        }
+        letter = letters.charAt(0);
+        boolean test = demo.raadLetter(letter);
+        if(test)
+            System.out.println("\"" + letter + "\""+" zit in het verborgen woord.");
+        else
+            System.out.println("\"" + letter +"\""+ " zit niet in het verborgen woord.");
+        solved = demo.isGeraden();
+        validKarakter = false;
+        }
+        hahaha = String.valueOf(demo.getGeRadenTekst());
+                System.out.println("Het woord "+ hahaha + " is geraden, proficiat!" +
+        "\n" + "Eindstand: "+ demo.getAantalPogingen() +" gokken zijn gedaan waarvan " + demo.getAantalNietCorPogingen() 
+        + " fout.");
+        
+        
+    }  
+}

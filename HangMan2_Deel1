@@ -1,0 +1,84 @@
+package oefenen;
+
+import java.util.Arrays;
+import java.util.Random;
+
+
+
+public class Hangman2 {
+
+private char[] teRadenTekst, geRadenTekst;
+private int aantalPogingen, aantalNietCorPogingen;
+
+    public Hangman2(String[] woorden) {
+        
+     int aantalWoorden = woorden.length;
+     Random nummer = new Random();
+     int woordIndex = nummer.nextInt(aantalWoorden);
+     teRadenTekst = woorden[woordIndex].toCharArray();
+     char[] temp = new char[teRadenTekst.length];
+     for(int i = 0; i< teRadenTekst.length; i++){
+         temp[i] = '?';
+     
+     }
+     geRadenTekst = temp;
+     for(int i = 0; i< teRadenTekst.length; i++){
+        if(teRadenTekst[i] == ' ')
+        
+        geRadenTekst[i] = ' ';
+     }
+     aantalPogingen = 0;
+     aantalNietCorPogingen = 0;
+    }
+
+    public char[] getGeRadenTekst() {
+        return geRadenTekst;
+    }
+
+    public int getAantalPogingen() {
+        return aantalPogingen;
+    }
+
+    public int getAantalNietCorPogingen() {
+        return aantalNietCorPogingen;
+    }
+
+    public boolean raadLetter(char letter){
+        int count = 0;
+if(Character.isLetter(letter)){
+    for(int i=0; i< teRadenTekst.length; i++){
+        if(teRadenTekst[i] == Character.toLowerCase(letter)){
+            geRadenTekst[i] = Character.toLowerCase(letter);
+            count++;}
+            else if(teRadenTekst[i] == Character.toUpperCase(letter)){
+                geRadenTekst[i] = Character.toUpperCase(letter);
+                count++;
+        }
+    }
+    if(count == 0)
+        aantalNietCorPogingen++;
+    aantalPogingen++;
+    return(count !=0);
+}
+else
+    return false;
+    }
+    
+    public boolean isGeraden(){
+        return (Arrays.equals(teRadenTekst, geRadenTekst));
+    }
+
+    public static void main(String[] args) {
+        String[] testu = {"sletje", "kutje"};
+        Hangman2 test = new Hangman2(testu);
+        
+        }
+    }
+
+
+
+
+
+
+
+

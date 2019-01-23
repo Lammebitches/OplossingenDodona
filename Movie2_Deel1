@@ -1,0 +1,75 @@
+public class Movie2 {
+
+private String naamFilm;
+private Label MPAA;
+private int[] ratings;
+private int verschrikkelijk, slecht, redelijk, goed, geweldig;
+    public Movie2(String naamFilm, String MPAA) {
+        this.naamFilm = naamFilm;
+        this.MPAA = Label.valueOf(MPAA);
+        
+        ratings = new int[5];
+            for(int i = 0 ; i < 5; i++){
+                ratings[i] = 0;
+                }
+    }
+
+    public Movie2(String naamFilm, String MPAA, int[] ratings) {
+        this.naamFilm = naamFilm;
+        this.MPAA = Label.valueOf(MPAA);
+        this.ratings = ratings;
+        ratings = new int[5];
+    }
+
+    public Label getMPAA() {
+        return MPAA;
+    }
+
+    public String getNaamFilm() {
+        return naamFilm;
+    }
+
+    public boolean voegRatingToe(int getal){
+    boolean test = false;
+    if(getal < 6 && getal > 0){   
+        test = true;
+        int aantal = this.ratings[getal - 1];
+        this.ratings[getal - 1] = ++aantal;
+        updateScores();
+    }    
+    else;
+    return test;      
+    }
+
+    public void updateScores(){
+        verschrikkelijk = ratings[0];
+        slecht = ratings[1];
+        redelijk = ratings[2];
+        goed = ratings[3];
+        geweldig = ratings[4];
+    }
+    public int getAantalRatings(){
+        int som = 0;
+        for(int i = 0; i < 5 ; i++){
+            som += this.ratings[i];
+        }
+        return som;
+    }
+   
+    public double getGemiddeldeRating(){
+        double totaal = this.getAantalRatings();
+        double verschrikkelijk = ratings[0];
+        double slecht = ratings[1];
+        double redelijk = ratings[2];
+        double goed = ratings[3];
+        double geweldig = ratings[4];
+        
+        if(totaal!= 0){
+        double gemiddelde = (verschrikkelijk *1 + slecht*2+ redelijk*3+goed*4+geweldig*5) / totaal;
+        return gemiddelde;
+        }
+    return 0;    
+    }
+    
+
+}

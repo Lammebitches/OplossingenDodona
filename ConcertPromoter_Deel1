@@ -1,0 +1,73 @@
+public class ConcertPromoter {
+
+private String naamBand;
+private int capaciteit, verkocht, prijsTelefoon, prijsKassa, omzet;
+private boolean voorverkoop;
+
+    public ConcertPromoter(String naamBand, int capaciteit, int prijsTelefoon, int prijsKassa) {
+        this.naamBand = naamBand;
+        this.capaciteit = capaciteit;
+        this.prijsTelefoon = prijsTelefoon;
+        this.prijsKassa = prijsKassa;
+        this.verkocht = 0;
+        this.omzet= 0;
+        this.voorverkoop = true;
+    }
+
+    public String getNaamBand() {
+        return naamBand;
+    }
+
+    public int getCapaciteit() {
+        return capaciteit;
+    }
+
+    public int getVerkocht() {
+        return verkocht;
+    }
+
+    public int getPrijsTelefoon() {
+        return prijsTelefoon;
+    }
+
+    public int getPrijsKassa() {
+        return prijsKassa;
+    }
+
+    public int getOmzet() {
+        return omzet;
+    }
+
+    public boolean isVoorverkoop() {
+        return voorverkoop;
+    }
+
+    public void verkoopTicket(int aantal){
+        int beschikbaar = capaciteit - verkocht;
+        if(beschikbaar > aantal){
+            verkocht += aantal;
+        int prijs;
+        if(this.isVoorverkoop())
+        omzet += prijsTelefoon * aantal; 
+        else
+            omzet += prijsKassa * aantal;                
+        }
+        else if(beschikbaar > 0){
+        verkocht = capaciteit;
+        int prijs;
+        if(this.isVoorverkoop())
+        omzet += prijsTelefoon * beschikbaar; 
+        else
+            omzet += prijsKassa * beschikbaar;                
+        }            
+        }
+    
+    public void eindeVoorverkoop(){
+        this.voorverkoop = false;
+            
+    }
+
+
+
+    
+}

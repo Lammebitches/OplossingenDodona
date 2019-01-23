@@ -1,0 +1,203 @@
+import java.util.Scanner;
+
+public class Videotheek {
+
+private Movie2[] films;
+private int aantal;
+
+    public Videotheek(int newmaxFilms) {
+        int maxFilms = newmaxFilms;
+        this.films = new Movie2[maxFilms];
+        aantal = 0;
+        }
+        
+        
+    
+    public void toevoegenFilm(String namee, String mpaaa){   
+    boolean test = true;
+    int count=0;
+    Movie2 temp = new Movie2(namee,mpaaa);
+    if(aantal < films.length){
+    for (int i = 0; i< aantal; i++) {
+    if(films[i].getNaamFilm().equals(namee)){ 
+
+        test = false;
+
+        break;
+    }
+    }
+    if(test){
+        films[aantal] = temp;
+        count++;
+        this.aantal++;
+
+    }
+    }}
+ 
+
+    public void toevoegenRating(String name, int rating){
+    int count = 0;
+        for (int i = 0; i< aantal; i++){
+       if(films[i].getNaamFilm().equals(name)){
+           films[i].voegRatingToe(rating);
+
+           count++;
+           break;
+       }
+       
+    }
+    if(count ==0)
+    System.out.println("");
+    }
+
+    public Movie2[] getFilms() {
+        return films;
+    }
+
+    public int getAantal() {
+        return aantal;
+    }
+
+    public static void main(String[] args) {
+    Scanner keyboard = new Scanner(System.in);
+    Boolean validAmount = false, validName = false, validMpaa = false, done = false,validRating = false, validName1 = false;
+    int max = 0, cijfer=0;
+    String mpaA ="", naam1 ="", maxi ="";
+    
+    while(validAmount== false){
+    System.out.println("Geef op hoeveel films onze videotheek kan bevatten:");
+    maxi = keyboard.nextLine();
+    int count =0;
+    for(int i=0; i < maxi.length(); i++){
+          if(!(Character.isDigit(maxi.toCharArray()[i]))){
+              count++;
+          }  
+    }
+    if(count == 0 && maxi.length() < 9 && maxi.length() > 0){
+    max= Integer.parseInt(maxi);
+    if(max < 5){
+        System.out.println("Geef een getal groter of gelijk aan 5 op!");
+    }
+    else
+        validAmount = true;}
+        else
+                System.out.println("Geef een getal groter of gelijk aan 5 op!");
+    
+    }  
+    
+    Videotheek demo = new Videotheek(max);
+    
+    while(done == false){
+    System.out.println("Film toevoegen of film een rating geven?");
+    String taak = keyboard.nextLine();
+    if(taak.equals("Toevoegen")){
+       while(validName == false){
+        System.out.println("Geef de naam van de film op:");
+        naam1 = keyboard.nextLine();
+    if(naam1.length() >=1){
+        int count = 0;
+        for(int l =0; l< naam1.length();l++){
+            if(naam1.charAt(l)== ' '){
+                count++;
+            }
+        }
+            if(count == naam1.length())
+                        System.out.println("De naam van de film moet minstens 1 karakter lang zijn!");
+            else{
+                validName = true;
+                }
+        
+        }
+         else
+        System.out.println("De naam van de film moet minstens 1 karakter lang zijn!");
+       }
+       
+       
+       
+       validName=false;
+       while(validMpaa ==false){
+       System.out.println("Geef het MPAA label van de film op:");
+       mpaA = keyboard.nextLine();
+       int count = 0;
+            for(Label nextLabel : Label.values())
+            {
+                if(mpaA.equals(String.valueOf(nextLabel))){
+                    count++;
+                }
+            }
+            if(count==1)
+                validMpaa = true;
+            else{
+                System.out.println("Enkel labels G, PG, PG13, R en NC17 zijn geldig!");
+            } 
+
+    }
+       demo.toevoegenFilm(naam1, mpaA);
+       validMpaa=false;
+    }
+    
+    else if(taak.equals("Rating")){
+while(validName1 == false){
+        System.out.println("Geef de naam van de film op:");
+        naam1 = keyboard.nextLine();
+    if(naam1.length() >=1){
+        int count = 0;
+        for(int l =0; l< naam1.length();l++){
+            if(naam1.charAt(l)== ' '){
+                count++;
+            }}
+        
+            if(count == naam1.length())
+                        System.out.println("De naam van de film moet minstens 1 karakter lang zijn!");
+            else
+                validName1 = true;
+        
+    }
+         else
+        System.out.println("De naam van de film moet minstens 1 karakter lang zijn!");
+       }
+validName1 = false;
+while(validRating == false){
+    String temp ="";
+    int count = 0;
+    System.out.println("Geef een rating voor de film:");
+    temp = keyboard.nextLine();
+
+for(int i=0; i < temp.length(); i++){
+          if(!(Character.isDigit(temp.toCharArray()[i]))){
+              count++;
+          }  
+    }
+    if(count == 0 && temp.length() < 9 && temp.length() > 0){
+    cijfer= Integer.parseInt(temp);
+    
+        if(cijfer <1 || cijfer > 5)
+        System.out.println("Geef een geldige rating in!");
+    else{
+        validRating = true;}
+    }    
+    else
+        System.out.println("Geef een geldige rating in!");
+    
+
+    
+}
+    validRating = false;
+    demo.toevoegenRating(naam1, cijfer);
+
+
+}
+    else if(taak.equals("Einde")){
+        done= true;
+        System.out.println("De volgende " + demo.getAantal() + " film(s) zijn in de videotheek opgenomen:");
+        System.out.println("");
+        for(int i = 0; i < demo.getAantal(); i++){
+          System.out.println(demo.films[i].getNaamFilm() + " met een gemiddelde rating van "+ demo.films[i].getGemiddeldeRating());  
+        }
+    
+    }
+    else
+        System.out.println("Ongeldige input.");
+    }
+    }
+}

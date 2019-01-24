@@ -1,6 +1,3 @@
-
-package oefenen;
-
 import java.util.Scanner;
 
 public class HangmanDemo {

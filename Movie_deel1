@@ -1,0 +1,71 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package oefenen;
+
+public class Movie {
+    
+    private String naamFilm;
+private Label MPAA;
+private int verschrikkelijk =0 , slecht= 0, redelijk=0, goed=0, geweldig=0, totaal=0;
+    public Movie(String naamFilm, String MPAA) {
+        this.naamFilm = naamFilm;
+        this.MPAA = Label.valueOf(MPAA);
+    }
+
+
+    public Label getMPAA() {
+        return MPAA;
+    }
+
+    public String getNaamFilm() {
+        return naamFilm;
+    }
+
+    public boolean voegRatingToe(int getal){
+    boolean test = false;
+    if(getal < 6 && getal > 0){   
+        test = true;
+        switch(getal){
+            case 1: this.verschrikkelijk++;
+            break;
+            case 2: this.slecht++;
+            break;
+            case 3: this.redelijk++;
+            break;
+            case 4: this.goed++;
+            break;
+            case 5: this.geweldig++;
+            break;
+            default: System.out.println("ERROR: onmogelijk");
+            break;
+            
+        }
+    }
+    return test;      
+    }
+
+    public int getAantalRatings(){
+ return verschrikkelijk + slecht + redelijk + goed +  geweldig;
+    }
+   
+    public double getGemiddeldeRating(){
+        double totaal = this.getAantalRatings();
+        double verschrikkelijk = this.verschrikkelijk;
+        double slecht = this.slecht;
+        double redelijk = this.redelijk;
+        double goed = this.goed;
+        double geweldig = this.geweldig;
+        
+        if(totaal!= 0){
+        double gemiddelde = (verschrikkelijk *1 + slecht*2+ redelijk*3+goed*4+geweldig*5) / totaal;
+        return gemiddelde;
+        }
+    return 0;    
+    }
+    
+
+
+}

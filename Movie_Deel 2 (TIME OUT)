@@ -1,0 +1,62 @@
+
+import java.util.Scanner;
+public class MovieDemo {
+
+    public static void main(String[] args) {
+    
+    Scanner sc = new Scanner(System.in);
+    boolean validLabel = false;
+    
+    String naam =" ", label = " ", taak =" ";
+    
+    while(Character.isLowerCase(naam.charAt(0)) || naam.length() < 5){
+        System.out.println("Geef naam van de film op:");
+        naam = sc.nextLine();
+        
+        if(Character.isLowerCase(naam.charAt(0)) || naam.length() < 5)
+            System.out.println("De naam van de film moet beginnen met een hoofdletter en minstens 5 karakters lang zijn!");
+    }
+    
+    while(validLabel == false){
+        System.out.println("Geef het MPAA label van de film op:");
+        label = sc.nextLine();
+        
+        switch (label){
+            case "G": validLabel = true;
+                      break;
+            case "PG": validLabel = true;
+                      break;
+            case "PG13": validLabel = true;
+                      break;
+            case "R": validLabel = true;
+                      break;
+            case "NC17": validLabel = true;
+                      break;
+            default: System.out.println("Enkel labels G, PG, PG13, R en NC17 zijn geldig!");
+                     break;
+            
+        }
+    }
+    
+    Movie demo = new Movie(naam, label);
+
+    
+    while(!"eindresultaat".equalsIgnoreCase(taak)){
+    System.out.println("Geef een rating voor de film:");
+    taak = sc.nextLine();
+        
+        if(taak.length() == 1 && Integer.parseInt(taak) < 6){
+        demo.voegRatingToe(Integer.parseInt(taak));
+        System.out.println("De film " + naam + " heeft " + demo.getAantalRatings()
+        + " en een gemiddelde rating van "+ demo.getGemiddeldeRating());
+        } 
+        else if(!(taak.equalsIgnoreCase("eindresultaat")))
+            System.out.println("Geef een geldige rating in!");
+    }
+    
+    System.out.println("Film: " + demo.getNaamFilm());
+    System.out.println("MPAA label: " + demo.getMPAA());
+    System.out.println("Aantal ratings: " + demo.getAantalRatings());
+    System.out.println("Gemiddelde rating: " + demo.getGemiddeldeRating());
+    
+    }}

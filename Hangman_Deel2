@@ -1,80 +1,56 @@
 
 package oefenen;
 
+import java.util.Scanner;
 
-public class Hangman {
+public class HangmanDemo {
 
-private String geheimWoord, verborgenWoord;
-private int aantalPogingen, aantalNietCorPogingen;
-
-    public Hangman(String geheimWoord) {
-        this.geheimWoord = geheimWoord;
-        int lengte = this.geheimWoord.length();
-        String temp = "?";
-        for(int i = 1; i < lengte; i++ ){
-            temp = temp +"?";
+    public static void main(String[] args) {
+        boolean solved = false, validWoord = false, validKarakter = false;
+        String woord ="", letters ="";
+        char letter;
+        Scanner keyb = new Scanner(System.in);
+        while(validWoord == false){
+    
+        System.out.println("Geef het te raden woord op:");
+        woord = keyb.nextLine();
+        if(woord.length() >= 1)
+            validWoord = true;
+        else
+           System.out.println("Het te raden woord moet minstens 1 karakter lang zijn!");
         }
-        this.verborgenWoord = temp;
-        aantalPogingen = 0;
-        aantalNietCorPogingen = 0;
+        Hangman demo = new Hangman(woord);
+        
+        
+        while(solved == false){
+                    while(validKarakter == false){
+        String verborgen = demo.getVerborgenWoord();
+        int aantal = demo.getAantalPogingen();
+        System.out.println("Het verborgen woord is voorlopig: "+ verborgen 
+         + "\n" + "Aantal gedane gokken: "+ aantal + "\n" + "Geef een"
+         + " karakter in:");
+
+        letters = keyb.nextLine();
+        if(letters.length() !=1)
+            System.out.println("Geef een enkel karakter in!");
+        else
+          validKarakter = true;  
+        }
+        letter = letters.charAt(0);
+        boolean test = demo.raadLetter(letter);
+        if(test)
+            System.out.println("\"" + letter + "\""+" zit in het verborgen woord.");
+        else
+            System.out.println("\"" + letter +"\""+ " zit niet in het verborgen woord.");
+        solved = demo.isGeraden();
+        validKarakter = false;
+        }
+        
+        System.out.println("Het woord "+ woord + " is geraden, proficiat!" +
+        "\n" + "Eindstand: "+ demo.getAantalPogingen() +" gokken zijn gedaan waarvan " + demo.getAantalNietCorPogingen() 
+        + " fout.");
+        
         
     }
-
-    public String getVerborgenWoord() {
-        return verborgenWoord;
-    }
-
-    public int getAantalPogingen() {
-        return aantalPogingen;
-    }
-
-    public int getAantalNietCorPogingen() {
-        return aantalNietCorPogingen;
-    }
-
-    public boolean raadLetter(char letter){
-        int count = 0;
-        char[] array = new char[geheimWoord.length()];
-        for(int i =0; i<geheimWoord.length(); i++){
-            if(geheimWoord.charAt(i) == Character.toLowerCase(letter)){
-            array = verborgenWoord.toCharArray();
-            array[i] = Character.toLowerCase(letter);
-            verborgenWoord = String.valueOf(array);            
-            count++;
-            }
-            else if(geheimWoord.charAt(i) == Character.toUpperCase(letter) ){
-            array = verborgenWoord.toCharArray();
-            array[i] = Character.toUpperCase(letter);
-            verborgenWoord = String.valueOf(array);            
-            count++;
-            }
-        }
-        if(count ==0)
-            aantalNietCorPogingen++;
-        aantalPogingen++;
-        return (count !=0);
-    }
-
-    public boolean isGeraden(){
-        return verborgenWoord.equals(geheimWoord);
-    }
-    
-public static void main(String[] args){
-    Hangman halg = new Hangman("eBOla");
-    System.out.println(halg.geheimWoord + " " + halg.verborgenWoord);
-    System.out.println(halg.geheimWoord.length() + " " +
-            halg.verborgenWoord.length());
-    System.out.println(halg.verborgenWoord);
-    halg.raadLetter('l');
-    System.out.println(halg.verborgenWoord);
-    halg.raadLetter('b');
-    halg.raadLetter('h');
-    halg.raadLetter('o');
-    halg.raadLetter('a');
-    System.out.println(halg.verborgenWoord);
-    System.out.println(halg.isGeraden());
-    System.out.println(halg.aantalPogingen + " " + halg.aantalNietCorPogingen);;
-}
-
     
 }

@@ -1,0 +1,130 @@
+
+import java.util.Scanner;
+
+
+public class ConcertPromoterDemo {
+
+    public static void main(String[] args) {
+        
+        Scanner keyboard = new Scanner(System.in);
+        boolean done = false, uitverkocht = false, validBand = false, validCapacity = false, validPrice1= false, validPrice2 = false;
+        String bandje = " ";
+        int capaciteit = 0, telefoonPrijs = 0, kassaPrijs = 0;
+        
+System.out.println("Geef de naam van de band op:");
+bandje = keyboard.nextLine();
+while(bandje.trim().length()<4){
+System.out.println("De naam van de band moet minstens 4 karakter lang "
++ "zijn zonder spaties in het begin of op het einde!");
+System.out.println("Geef de naam van de band op:");
+bandje = keyboard.nextLine();
+}
+        
+        while(validCapacity == false){
+        System.out.println("Geef de capaciteit van het concert:");
+        String temp = ""; 
+              temp  = keyboard.nextLine();
+                    int count = 0;
+                    for(int i = 0; i < temp.length(); i++){
+                        if(Character.isDigit(temp.charAt(i))){
+                            count++;
+                        }
+                    }       if(count == temp.length() && temp.length() < 9 && temp.length() > 0){
+                    capaciteit = Integer.parseInt(temp);
+                    }
+                        
+                        
+ 
+        if(capaciteit >= 10){
+            validCapacity = true;}
+            else
+            System.out.println("Er moeten minstens 10 mensen naar het concert kunnen komen!");
+        
+        
+        }
+        while(validPrice1 == false){
+        System.out.println("Geef hoeveel een ticket via de telefoon kost:");
+        telefoonPrijs = keyboard.nextInt();
+
+        
+        if(telefoonPrijs < 1)
+            System.out.println("Een ticket moet meer dan 0 euro kosten!");
+        else
+            validPrice1= true;
+        }
+        
+        while(validPrice2 == false){
+        System.out.println("Geef hoeveel een ticket aan de kassa kost:");
+        kassaPrijs = keyboard.nextInt();
+        keyboard.nextLine();
+
+        if(kassaPrijs < 1)
+            System.out.println("Een ticket moet meer dan 0 euro kosten!");
+        else
+            validPrice2= true;        
+        }
+        
+        ConcertPromoter Demo = new ConcertPromoter(bandje, capaciteit, telefoonPrijs, kassaPrijs);
+
+        while(done == false && uitverkocht == false){
+        int aantal =0;
+        System.out.println("Hoeveel tickets wil je kopen?");
+        String taak = keyboard.nextLine();
+            switch (taak) {
+                case "einde voorverkoop":
+                    Demo.eindeVoorverkoop();
+                    System.out.println("Vanaf nu worden er enkel nog tickets aan de kassa verkocht!");
+                    break;
+                case "einde verkoop":
+                    done = true;
+                    int rest = Demo.getCapaciteit() - Demo.getVerkocht();
+
+                    break;
+                default:
+                    int count = 0;
+                    for(int i = 0; i < taak.length(); i++){
+                        if(Character.isDigit(taak.charAt(i))){
+                            count++;
+                        }
+                    }       if(count == taak.length() && taak.length() > 0){
+                        aantal = Integer.parseInt(taak);
+                        
+                        if(aantal >= 0){
+                            int voorafBeschikbaar = Demo.getCapaciteit() - Demo.getVerkocht();
+                            Demo.verkoopTicket(aantal);
+                            int beschikbaar = Demo.getCapaciteit() - Demo.getVerkocht();
+                            boolean test = Demo.isVoorverkoop();
+                            int effectiefVerkocht;
+                            if(aantal > voorafBeschikbaar){
+                                effectiefVerkocht = voorafBeschikbaar;
+                            }
+                            else
+                                effectiefVerkocht = aantal;
+                            if(test){
+                                System.out.println("Er zijn " + effectiefVerkocht + " tickets via de telefoon verkocht.");
+                                System.out.println("Er zijn nog " + beschikbaar + " tickets beschikbaar.");
+                            }
+                            else{
+                                System.out.println("Er zijn " + effectiefVerkocht + " tickets aan de kassa verkocht.");
+                                System.out.println("Er zijn nog " + beschikbaar + " tickets beschikbaar.");
+                            }
+                            if(beschikbaar == 0)
+                                uitverkocht = true;
+                            
+                        }                           
+                    }
+                   else
+                   System.out.println("Tickets worden niet teruggekocht!");
+                    break;
+            }
+        
+ 
+     
+            }
+                    int rest = Demo.getCapaciteit() - Demo.getVerkocht();            
+                    System.out.println("De verkoop van tickets is gedaan.");
+                    System.out.println("Er zijn nog " + rest + " tickets over.");
+                    System.out.println("Het concert van " + bandje + " heeft een omzet van " + Demo.getOmzet()+ " euro behaald.");
+    }
+    
+}
